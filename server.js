@@ -24,7 +24,7 @@ const server = http.createServer((request, response) => {
             'Content-Type': 'application/javascript; charset=utf-8',
             'Cache-Control': 'no-store',
         });
-        response.end(`window.BACKEND_ORIGIN = ${JSON.stringify(process.env.BACKEND_ORIGIN || '')};`);
+        response.end(`window.BACKEND_ORIGIN = ${JSON.stringify(process.env.BACKEND_ORIGIN || 'https://proyecto-de-stock-del-hospital-backend.onrender.com')};`);
         return;
     }
 
