@@ -1,7 +1,7 @@
 // utils.js - Funciones comunes para manejo de modales, alertas, sesión y navegación
 
 const DEFAULT_BACKEND_ORIGIN = 'https://proyecto-de-stock-del-hospital-backend.onrender.com';
-const LOCAL_BACKEND_ORIGIN = 'http://localhost:3001';
+const LOCAL_BACKEND_ORIGIN = 'http://localhost:3000';
 
 // FUNCIONES DE URL Y BACKEND
 

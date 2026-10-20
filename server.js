@@ -1,7 +1,6 @@
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const frontendRoot = __dirname;
 const port = Number(process.env.PORT) || 3000;
@@ -19,21 +18,10 @@ const mimeTypes = {
 
 const server = http.createServer((request, response) => {
     const requestedPath = decodeURIComponent(request.url.split('?')[0]);
-    if (requestedPath === '/api/config') {
-        response.writeHead(200, {
-            'Content-Type': 'application/javascript; charset=utf-8',
-            'Cache-Control': 'no-store',
-        });
-        response.end(`window.BACKEND_ORIGIN = ${JSON.stringify(process.env.BACKEND_ORIGIN || 'https://proyecto-de-stock-del-hospital-backend.onrender.com')};`);
-        return;
-    }
-
     const relativePath = requestedPath === '/' ? '/src/pages/index.html' : requestedPath;
     const filePath = path.resolve(frontendRoot, `.${relativePath}`);
 
-    if ((filePath !== frontendRoot && !filePath.startsWith(`${frontendRoot}${path.sep}`))
-        || !fs.existsSync(filePath)
-        || fs.statSync(filePath).isDirectory()) {
+    if (!filePath.startsWith(frontendRoot) || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
         response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
         response.end('Archivo no encontrado');
         return;
